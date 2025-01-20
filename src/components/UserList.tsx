@@ -1,12 +1,13 @@
-import { type User } from "../types"
+import { SortBy, type User } from "../types.d"
 
 interface UserListProps {
   users: User[]
   showColors: boolean
+  changeSorting: (sort: SortBy) => void
   deleteUser: (index: string) => void
 }
 
-export const UsersList = ({ users, showColors, deleteUser }: UserListProps) => {
+export const UsersList = ({ users, showColors, changeSorting, deleteUser }: UserListProps) => {
   return (
     <table style={{
       tableLayout: "fixed",
@@ -15,11 +16,11 @@ export const UsersList = ({ users, showColors, deleteUser }: UserListProps) => {
     }}>
       <thead>
         <tr>
-          <th>Foto</th>
-          <th>Nombre</th>
-          <th>Apellido</th>
-          <th>País</th>
-          <th>Acciones</th>
+          <th className="pointer">Foto</th>
+          <th className="pointer" onClick={() => changeSorting(SortBy.NAME)}>Nombre</th>
+          <th className="pointer" onClick={() => changeSorting(SortBy.LAST)}>Apellido</th>
+          <th className="pointer" onClick={() => changeSorting(SortBy.COUNTRY)}>País</th>
+          <th className="pointer">Acciones</th>
         </tr>
       </thead>
       <tbody>
